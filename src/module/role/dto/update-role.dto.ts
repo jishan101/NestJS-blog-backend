@@ -15,7 +15,7 @@ export class UpdateRoleDTO {
   @ApiPropertyOptional()
   @IsOptional()
   @IsBoolean()
-  isActive: string;
+  isActive: boolean;
 
   @ApiResponseProperty()
   updatedBy: string;

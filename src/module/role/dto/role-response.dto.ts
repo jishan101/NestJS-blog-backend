@@ -29,5 +29,5 @@ export class RoleResponseDTO {
   isActive: boolean;
 
   @ApiResponseProperty()
-  __v: boolean;
+  __v: number;
 }

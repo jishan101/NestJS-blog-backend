@@ -17,6 +17,12 @@ export class UserResponseDTO {
   lastName: string;
 
   @ApiResponseProperty()
+  roleId: string;
+
+  @ApiResponseProperty()
+  isApproved: boolean;
+
+  @ApiResponseProperty()
   createdBy: string;
 
   @ApiResponseProperty()
@@ -32,5 +38,5 @@ export class UserResponseDTO {
   isActive: boolean;
 
   @ApiResponseProperty()
-  __v: boolean;
+  __v: number;
 }

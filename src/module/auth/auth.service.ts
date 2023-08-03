@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcrypt';
 import { UserService } from '../user/user.service';
 import { LoginResponseDTO } from './dto/login-response.dto';
 import { LoginDTO } from './dto/login.dto';
@@ -26,7 +25,7 @@ export class AuthService {
       throw new BadRequestException('Requested user is inactive.');
     }
 
-    const isPasswordValid = await bcrypt.compare(
+    const isPasswordValid = await this.userService.comparePassword(
       credentials.password,
       user.password,
     );

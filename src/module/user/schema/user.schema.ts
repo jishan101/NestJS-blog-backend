@@ -21,14 +21,14 @@ export class User extends Document {
   @Prop()
   roleId: string;
 
+  @Prop({ default: false })
+  isApproved: boolean;
+
   @Prop()
   createdBy: string;
 
   @Prop()
   updatedBy: string;
-
-  @Prop({ default: false })
-  isApproved: boolean;
 
   @Prop({ default: true })
   isActive: boolean;
