@@ -22,8 +22,13 @@ export class RoleService {
     return this.roleModel.find();
   }
 
-  public getRoleById(id: string | Schema.Types.ObjectId) {
-    return this.roleModel.findById(id);
+  public async getRoleById(id: string | Schema.Types.ObjectId) {
+    const role = await this.roleModel.findById(id);
+    if (!role) {
+      throw new NotFoundException(`Role does not exist.`);
+    }
+
+    return role;
   }
 
   public findByShortForm(shortForm: string) {
@@ -47,21 +52,12 @@ export class RoleService {
     return await newRole.save();
   }
 
-  public async canUpdateDeleteRole(id: string | Schema.Types.ObjectId) {
-    const role = await this.getRoleById(id);
-    if (!role) {
-      throw new NotFoundException(`Role does not exist.`);
-    }
-
-    return role;
-  }
-
   public async updateRole(
     id: string | Schema.Types.ObjectId,
     body: UpdateRoleDTO,
     authUser: UserPayload,
   ) {
-    await this.canUpdateDeleteRole(id);
+    await this.getRoleById(id);
 
     body.updatedBy = authUser?.userId;
     const updatedRole = await this.roleModel.findByIdAndUpdate(id, body);
@@ -70,7 +66,7 @@ export class RoleService {
   }
 
   public async deleteRole(id: string | Schema.Types.ObjectId) {
-    await this.canUpdateDeleteRole(id);
+    await this.getRoleById(id);
 
     const deletedRole = await this.roleModel.findByIdAndDelete(id);
 
