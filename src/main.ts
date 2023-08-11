@@ -6,6 +6,9 @@ import helmet from 'helmet';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
+  const CSS_URL =
+    'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css';
+
   const logger = new Logger('NestJS Blog Backend');
 
   const app = await NestFactory.create(AppModule);
@@ -23,7 +26,7 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig);
-  SwaggerModule.setup('docs', app, document);
+  SwaggerModule.setup('docs', app, document, { customCssUrl: CSS_URL });
 
   const port = config.get('PORT', 4000);
 
