@@ -10,7 +10,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { ApiGuard, CurrentUser } from 'src/decorator';
+import { ApiGuard, CurrentUser } from '../../decorator';
 import { UserPayload } from '../auth/user-payload';
 import { DeleteResponseDTO, UpdateResponseDTO } from '../shared/dto';
 import { CreateUserDTO } from './dto/create-user.dto';
