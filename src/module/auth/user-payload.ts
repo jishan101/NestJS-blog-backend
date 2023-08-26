@@ -11,6 +11,8 @@ export class UserPayload {
   email: string;
   firstName: string;
   lastName: string;
+  imageUrl: string;
+  birthDate: string;
   role: IUserRole;
 
   constructor(partial?: Partial<UserPayload>) {

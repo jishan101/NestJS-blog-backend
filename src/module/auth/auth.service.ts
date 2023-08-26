@@ -49,6 +49,8 @@ export class AuthService {
       email: validUser.email,
       firstName: validUser.firstName,
       lastName: validUser.lastName,
+      imageUrl: validUser.imageUrl,
+      birthDate: validUser.birthDate,
       role: validUser.role,
     };
 

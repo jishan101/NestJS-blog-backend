@@ -3,7 +3,13 @@ import {
   ApiPropertyOptional,
   ApiResponseProperty,
 } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, MinLength } from 'class-validator';
+import {
+  IsDate,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MinLength,
+} from 'class-validator';
 
 export class CreateUserDTO {
   @ApiProperty()
@@ -25,12 +31,24 @@ export class CreateUserDTO {
   password: string;
 
   @ApiPropertyOptional()
+  @IsOptional()
   @IsString()
   firstName: string;
 
   @ApiPropertyOptional()
+  @IsOptional()
   @IsString()
   lastName: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  imageUrl: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsDate()
+  birthDate: Date;
 
   @ApiResponseProperty()
   createdBy: string;

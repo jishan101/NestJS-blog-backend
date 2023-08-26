@@ -19,6 +19,12 @@ export class User extends Document {
   lastName: string;
 
   @Prop()
+  imageUrl: string;
+
+  @Prop()
+  birthDate: Date;
+
+  @Prop()
   roleId: string;
 
   @Prop({ default: false })
