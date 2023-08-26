@@ -12,7 +12,7 @@ import {
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { ApiGuard, CurrentUser } from '../../decorator';
 import { UserPayload } from '../auth/user-payload';
-import { UpdateResponseDTO } from '../shared/dto';
+import { DeleteResponseDTO, UpdateResponseDTO } from '../shared/dto';
 import { CreateRoleDTO } from './dto/create-role.dto';
 import { RoleResponseDTO } from './dto/role-response.dto';
 import { UpdateRoleDTO } from './dto/update-role.dto';
@@ -60,7 +60,7 @@ export class RoleController {
   }
 
   @HttpCode(HttpStatus.OK)
-  @ApiOkResponse({ type: UpdateResponseDTO })
+  @ApiOkResponse({ type: DeleteResponseDTO })
   @Delete('delete/:id')
   public deleteRole(@Param('id') id: string) {
     return this.roleService.deleteRole(id);
