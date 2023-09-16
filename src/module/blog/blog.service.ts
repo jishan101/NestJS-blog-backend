@@ -23,6 +23,32 @@ export class BlogService {
     return this.blogModel.find();
   }
 
+  public async getByPageAndLimit(
+    page: number | string,
+    limit: number | string,
+  ) {
+    page = Number(page);
+    limit = Number(limit);
+
+    const data = await this.blogModel.aggregate([
+      {
+        $facet: {
+          metadata: [{ $count: 'total' }],
+          data: [
+            { $sort: { createdAt: -1 } },
+            { $skip: (page - 1) * limit },
+            { $limit: limit },
+          ],
+        },
+      },
+    ]);
+
+    return {
+      total: data[0].metadata[0].total,
+      blogs: data[0].data,
+    };
+  }
+
   public getBlogsByAuthorId(authorId: string | Schema.Types.ObjectId) {
     return this.blogModel.find({ createdBy: authorId });
   }

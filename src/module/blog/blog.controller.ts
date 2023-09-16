@@ -15,6 +15,7 @@ import { UserPayload } from '../auth/user-payload';
 import { DeleteResponseDTO, UpdateResponseDTO } from '../shared/dto';
 import { BlogService } from './blog.service';
 import { BlogResponseDTO } from './dto/blog-response.dto';
+import { BlogWithTotalResponseDTO } from './dto/blog-with-total-response.dto';
 import { CreateBlogDTO } from './dto/create-blog.dto';
 import { UpdateBlogDTO } from './dto/update-blog.dto';
 
@@ -28,6 +29,16 @@ export class BlogController {
   @Get('all')
   public getAllBlogs() {
     return this.blogService.getAllBlogs();
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @ApiOkResponse({ type: BlogWithTotalResponseDTO })
+  @Get('get-by-page/:page/:limit')
+  public getByPageNo(
+    @Param('page') page: string,
+    @Param('limit') limit: string,
+  ) {
+    return this.blogService.getByPageAndLimit(page, limit);
   }
 
   @ApiGuard()
