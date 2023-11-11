@@ -115,16 +115,16 @@ export class BlogService {
     await this.canUpdateBlog(id, body);
 
     body.updatedBy = authUser?.userId;
-    const updatedRole = await this.blogModel.findByIdAndUpdate(id, body);
+    const updatedBlog = await this.blogModel.findByIdAndUpdate(id, body);
 
-    return ResponseHelper.updateResponse(updatedRole ? true : false, id);
+    return ResponseHelper.updateResponse(updatedBlog ? true : false, id);
   }
 
   public async deleteBlog(id: string | Schema.Types.ObjectId) {
     await this.getBlogById(id);
 
-    const deletedRole = await this.blogModel.findByIdAndDelete(id);
+    const deletedBlog = await this.blogModel.findByIdAndDelete(id);
 
-    return ResponseHelper.deleteResponse(deletedRole ? true : false);
+    return ResponseHelper.deleteResponse(deletedBlog ? true : false);
   }
 }
